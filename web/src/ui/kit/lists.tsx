@@ -232,6 +232,8 @@ export function Segments<T extends string>({
               data-testid={it.testId}
               data-pick={it.key}
               data-on={on || undefined}
+              type="button"
+              {...(it.attrs?.role ? {} : { 'aria-pressed': on })}
               /* The one that is not the answer lights under the pointer, the
                way every other pressable thing does. The chip is the answer,
                and an answer does not need saying twice. */

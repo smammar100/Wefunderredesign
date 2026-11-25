@@ -202,7 +202,7 @@ export function PersonWindow({
               onClose()
               doors.open?.(actorId)
             }}
-            className="text-sm font-medium text-accent"
+            className="text-sm font-medium text-accent-ink"
           >
             {W.openTheirPage}
           </button>

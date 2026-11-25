@@ -78,7 +78,7 @@ export function CyclePick({
         }}
         onPointerEnter={(e) => e.pointerType === 'mouse' && setWarm(true)}
         onPointerLeave={() => setWarm(false)}
-        className={face ? 'flex min-w-px items-center' : 'flex size-5 shrink-0 items-center justify-center transition-colors'}
+        className={face ? 'flex min-w-px items-center' : 'relative flex size-5 shrink-0 items-center justify-center transition-colors before:absolute before:-inset-1'}
         style={face ? undefined : { color: warm && !disabled ? 'var(--ink)' : 'var(--ink-3)' }}
       >
         {face ?? <Icon name="cycle" size={16} />}
@@ -101,7 +101,7 @@ export function CyclePick({
             <input
               {...findField}
               data-testid="cycle-search"
-              autoFocus
+              autoFocus={window.matchMedia('(pointer: fine)').matches}
               value={typed}
               onChange={(e) => setTyped(e.target.value)}
               onKeyDown={(e) => {
@@ -224,7 +224,7 @@ export function Status({
           const box = ring.current?.getBoundingClientRect()
           if (box) setAt({ x: box.left, y: box.bottom, r: box.right })
         }}
-        className="flex size-5 shrink-0 items-center justify-center"
+        className="relative flex size-5 shrink-0 items-center justify-center before:absolute before:-inset-1"
       >
         <Dot icon={here?.icon ?? null} color={here?.color} />
       </button>

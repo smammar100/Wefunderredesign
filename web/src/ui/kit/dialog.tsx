@@ -89,6 +89,20 @@ export function Dialog({
     setLeaving(true)
     setTimeout(onClose, 160)
   }, [onClose])
+  /* Focus into the window when it opens, and back to whatever opened it
+     when it shuts — otherwise a keyboard is left on the page behind it. */
+  useEffect(() => {
+    const opener = document.activeElement instanceof HTMLElement ? document.activeElement : null
+    const all = document.querySelectorAll<HTMLElement>('[aria-modal="true"]')
+    const panel = all[all.length - 1]
+    if (panel && !panel.contains(document.activeElement)) {
+      panel.tabIndex = -1
+      panel.focus({ preventScroll: true })
+    }
+    return () => {
+      if (opener?.isConnected) opener.focus({ preventScroll: true })
+    }
+  }, [])
   useEffect(() => {
     /*
      * A menu open inside it is what the key is shutting — a picker's, or
@@ -106,8 +120,10 @@ export function Dialog({
       if (e.key === 'Escape') menu = Boolean(document.querySelector('[data-over], [data-testid="block-list"], [data-mention-list]'))
     }
     const key = (e: KeyboardEvent) => {
+      /* At once: a key is pressed many times a day, and a window that
+         fades out after it reads as one that did not hear. */
       if (e.key !== 'Escape' || menu) return
-      leave()
+      onClose()
     }
     window.addEventListener('keydown', before, true)
     window.addEventListener('keydown', key)
@@ -115,7 +131,7 @@ export function Dialog({
       window.removeEventListener('keydown', before, true)
       window.removeEventListener('keydown', key)
     }
-  }, [leave])
+  }, [onClose])
   const large = size === 'large'
   const phone = usePhone()
   if (sheet && large && phone) {
@@ -221,7 +237,7 @@ export function Dialog({
               data-testid="dialog-close"
               aria-label={BAR.close}
               onClick={leave}
-              className="ml-auto flex size-6 items-center justify-center text-ink-3"
+              className="relative ml-auto flex size-6 items-center justify-center text-ink-3 pointer-coarse:before:absolute pointer-coarse:before:-inset-2.5"
               style={{ borderRadius: 'var(--r-row)' }}
             >
               <Icon name="plus" size={14} style={{ transform: 'rotate(45deg)' }} />

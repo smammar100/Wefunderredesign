@@ -374,8 +374,8 @@ export function Popover({
                screen, and a rounded corner there draws a card floating on
                nothing. */
               borderRadius: phone ? 'var(--r-panel) var(--r-panel) 0 0' : 'var(--r-card)',
-              boxShadow: phone ? 'var(--glass-shadow)' : 'var(--card-shadow)',
-              border: phone ? 'none' : '1px solid var(--line)',
+              boxShadow: phone ? 'var(--glass-shadow)' : 'var(--float-shadow)',
+              border: 'none',
               borderTop: phone ? '1px solid var(--glass-edge)' : undefined,
               /*
                * It grows from the button that opened it, so it comes from
@@ -539,7 +539,7 @@ export function Choice<T extends string>({
         aria-label={said}
         value={value}
         onChange={(e) => onPick(e.target.value as T)}
-        className="w-full rounded-[var(--r-row)] px-2 text-base outline-none bg-track text-ink"
+        className="w-full rounded-[var(--r-row)] px-2 text-base bg-track text-ink"
         style={{ height: '32px' }}
       >
         {options.map((o) => (

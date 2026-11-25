@@ -81,7 +81,7 @@ function DoingLine({
       title={agent ? `${agent.name} · ${said}` : said}
       className={`flex min-w-0 items-center gap-1 ${tone} ${className}`}
     >
-      <span className="truncate">{whole}</span>
+      <span className="truncate tabular-nums">{whole}</span>
     </span>
   )
 }

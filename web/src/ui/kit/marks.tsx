@@ -1,7 +1,7 @@
 import { KIT as W } from '../../words/kit.js'
 import { type AgentFace } from '@tracker/shared-schema'
 import { agentFaceSvg } from '../../data/agentFaces.js'
-import { Fragment } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import { Icon, type IconName } from '../glyphs.jsx'
 
 /**
@@ -19,7 +19,7 @@ export function DocMark({ icon, tint, size }: { icon: string | null; tint: numbe
       style={{
         width: size,
         height: size,
-        background: tint == null ? 'var(--accent)' : `var(--tint-${tint})`,
+        background: tint == null ? 'var(--accent)' : `var(--face-${tint})`,
         borderRadius: size >= 40 ? 'var(--r-row)' : 8,
         color: '#fff',
       }}
@@ -349,10 +349,22 @@ export function AgentFaceMark({
   /** Seconds into its loop it starts, so faces side by side are not in step. */
   at?: number
 }) {
+  /* A face moves only while it can be seen: six loops on every working
+     agent of a long list, scrolled away, were frames spent on nothing. */
+  const self = useRef<HTMLSpanElement>(null)
+  const [seen, setSeen] = useState(true)
+  useEffect(() => {
+    const el = self.current
+    if (!live || !el || typeof IntersectionObserver === 'undefined') return
+    const eye = new IntersectionObserver(([e]) => setSeen(e!.isIntersecting))
+    eye.observe(el)
+    return () => eye.disconnect()
+  }, [live])
   return (
     <span
+      ref={self}
       data-agent-face={id}
-      data-live={live ? '' : undefined}
+      data-live={live && seen ? '' : undefined}
       role="img"
       aria-label={title}
       title={title}

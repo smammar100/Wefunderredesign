@@ -3,250 +3,27 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>Tuff</title>
-    <!--
-      What a link to the site unfurls as in a chat, a post or a message: the
-      landing's own headline and the line under it, over the top of the
-      landing as one picture — baked by a script of the hosted service at twice 1200 × 630.
-      Absolute, because an unfurler does not resolve a path against the page,
-      and here rather than drawn by the app, because none of them runs it.
-    -->
-    <meta name="description" content="Tuff is a project management app for teams and their AI agents: tasks, chat and docs in one place, at one flat price for the whole team — not per seat." />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Tuff" />
-    <meta property="og:url" content="https://usetuff.com/" />
-    <meta property="og:title" content="Tuff — Tasks, docs and chat. One price for the whole team" />
-    <meta property="og:description" content="One simple and fast app for your team and its AI agents — priced for the workspace, not for every seat." />
-    <meta property="og:image" content="https://usetuff.com/og.png" />
-    <meta property="og:image:width" content="2400" />
-    <meta property="og:image:height" content="1260" />
-    <meta property="og:image:alt" content="Tasks, docs and chat. One price for the whole team — over a project's board in Tuff" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <!--
-      What a browser needs before it will keep a notification permission, and
-      what an installed copy is called.
-
-      The manifest's icons are inset, because a dock icon draws its shape
-      inside four fifths of its tile and one that fills the square stands
-      taller than everything beside it. The favicon below is not: a tab icon
-      is sixteen pixels, and a margin there is four of them thrown away.
-    -->
-    <link rel="manifest" href="/manifest.webmanifest" />
-    <!--
-      Baked from `icon.svg` rather than the SVG itself: a browser draws an
-      SVG favicon at sixteen pixels, grain filter and all, and the grain
-      came out a speck a pixel and twice as bright as the design.
-      `scripts/icons.mjs`.
-    -->
+    <title>Tuff Design System</title>
     <link rel="icon" href="/favicon.png" type="image/png" sizes="64x64" />
-    <!--
-      iOS, which masks whatever it is given into the squircle itself — so
-      this one is full bleed, where the manifest's are inset for a dock that
-      expects the app to supply its own shape.
-    -->
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <!-- The standard name, which Chrome asks for, and Apple's, which older
-         iPhones still read: both, until the old one is nobody's. -->
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-title" content="Tuff" />
-    <!--
-      Safari on an iPhone or iPad offers the App Store app in a bar of its
-      own over the page, which it hides once the app is installed or the
-      bar is closed.
-    -->
-    <meta name="apple-itunes-app" content="app-id=6827503722" />
-    <!--
-      What iOS shows between the tap on the icon and the page — without one
-      it is a black screen for as long as the page takes. The mark centred on
-      the ground, the same picture `#splash` below draws once the page is in,
-      so one hands over to the other without a seam. One per screen size and
-      theme, because iOS picks by an exact match and stretches nothing.
-      Baked by `scripts/icons.mjs`; `docs/specs/arrival.md`.
-    -->
-    <!--launch-->
-    <link rel="apple-touch-startup-image" href="/launch/1320x2868.png" media="(device-width: 440px) and (device-height: 956px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) and (prefers-color-scheme: light)" />
-    <link rel="apple-touch-startup-image" href="/launch/1320x2868-dark.png" media="(device-width: 440px) and (device-height: 956px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) and (prefers-color-scheme: dark)" />
-    <link rel="apple-touch-startup-image" href="/launch/1206x2622.png" media="(device-width: 402px) and (device-height: 874px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) and (prefers-color-scheme: light)" />
-    <link rel="apple-touch-startup-image" href="/launch/1206x2622-dark.png" media="(device-width: 402px) and (device-height: 874px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) and (prefers-color-scheme: dark)" />
-    <link rel="apple-touch-startup-image" href="/launch/1260x2736.png" media="(device-width: 420px) and (device-height: 912px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) and (prefers-color-scheme: light)" />
-    <link rel="apple-touch-startup-image" href="/launch/1260x2736-dark.png" media="(device-width: 420px) and (device-height: 912px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) and (prefers-color-scheme: dark)" />
-    <link rel="apple-touch-startup-image" href="/launch/1290x2796.png" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) and (prefers-color-scheme: light)" />
-    <link rel="apple-touch-startup-image" href="/launch/1290x2796-dark.png" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) and (prefers-color-scheme: dark)" />
-    <link rel="apple-touch-startup-image" href="/launch/1179x2556.png" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) and (prefers-color-scheme: light)" />
-    <link rel="apple-touch-startup-image" href="/launch/1179x2556-dark.png" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) and (prefers-color-scheme: dark)" />
-    <link rel="apple-touch-startup-image" href="/launch/1284x2778.png" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) and (prefers-color-scheme: light)" />
-    <link rel="apple-touch-startup-image" href="/launch/1284x2778-dark.png" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) and (prefers-color-scheme: dark)" />
-    <link rel="apple-touch-startup-image" href="/launch/1170x2532.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) and (prefers-color-scheme: light)" />
-    <link rel="apple-touch-startup-image" href="/launch/1170x2532-dark.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) and (prefers-color-scheme: dark)" />
-    <link rel="apple-touch-startup-image" href="/launch/1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) and (prefers-color-scheme: light)" />
-    <link rel="apple-touch-startup-image" href="/launch/1125x2436-dark.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) and (prefers-color-scheme: dark)" />
-    <link rel="apple-touch-startup-image" href="/launch/1242x2688.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) and (prefers-color-scheme: light)" />
-    <link rel="apple-touch-startup-image" href="/launch/1242x2688-dark.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) and (prefers-color-scheme: dark)" />
-    <link rel="apple-touch-startup-image" href="/launch/828x1792.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) and (prefers-color-scheme: light)" />
-    <link rel="apple-touch-startup-image" href="/launch/828x1792-dark.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) and (prefers-color-scheme: dark)" />
-    <link rel="apple-touch-startup-image" href="/launch/750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) and (prefers-color-scheme: light)" />
-    <link rel="apple-touch-startup-image" href="/launch/750x1334-dark.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) and (prefers-color-scheme: dark)" />
-    <link rel="apple-touch-startup-image" href="/launch/640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) and (prefers-color-scheme: light)" />
-    <link rel="apple-touch-startup-image" href="/launch/640x1136-dark.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) and (prefers-color-scheme: dark)" />
-    <link rel="apple-touch-startup-image" href="/launch/2048x2732.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) and (prefers-color-scheme: light)" />
-    <link rel="apple-touch-startup-image" href="/launch/2048x2732-dark.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) and (prefers-color-scheme: dark)" />
-    <link rel="apple-touch-startup-image" href="/launch/1668x2388.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) and (prefers-color-scheme: light)" />
-    <link rel="apple-touch-startup-image" href="/launch/1668x2388-dark.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) and (prefers-color-scheme: dark)" />
-    <link rel="apple-touch-startup-image" href="/launch/1640x2360.png" media="(device-width: 820px) and (device-height: 1180px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) and (prefers-color-scheme: light)" />
-    <link rel="apple-touch-startup-image" href="/launch/1640x2360-dark.png" media="(device-width: 820px) and (device-height: 1180px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) and (prefers-color-scheme: dark)" />
-    <link rel="apple-touch-startup-image" href="/launch/1668x2224.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) and (prefers-color-scheme: light)" />
-    <link rel="apple-touch-startup-image" href="/launch/1668x2224-dark.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) and (prefers-color-scheme: dark)" />
-    <link rel="apple-touch-startup-image" href="/launch/1620x2160.png" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) and (prefers-color-scheme: light)" />
-    <link rel="apple-touch-startup-image" href="/launch/1620x2160-dark.png" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) and (prefers-color-scheme: dark)" />
-    <link rel="apple-touch-startup-image" href="/launch/1536x2048.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) and (prefers-color-scheme: light)" />
-    <link rel="apple-touch-startup-image" href="/launch/1536x2048-dark.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) and (prefers-color-scheme: dark)" />
-    <link rel="apple-touch-startup-image" href="/launch/1488x2266.png" media="(device-width: 744px) and (device-height: 1133px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) and (prefers-color-scheme: light)" />
-    <link rel="apple-touch-startup-image" href="/launch/1488x2266-dark.png" media="(device-width: 744px) and (device-height: 1133px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait) and (prefers-color-scheme: dark)" />
-    <!--/launch-->
-    <!--
-      The theme, before the first paint.
-
-      Resolved here and not in the app because the app starts a beat later,
-      and a beat is long enough to show a white screen to somebody who asked
-      for a dark one. The same three answers the switch writes: a stated
-      preference, or the machine's when there is none.
-    -->
+    <!-- The landing faces, fetched with the page so headings don't reflow when they land. -->
+    <link rel="preload" href="/landing/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/landing/fonts/geist-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <!-- The theme before the first paint: a stated preference, or the machine's. -->
     <script>
       try {
         var t = localStorage.getItem('theme')
-        /* A public page written out as HTML is dark whatever the visitor
-           chose — the landing, Help, the legal pages — and says so on its
-           root: */
-        var dark =
-          document.documentElement.hasAttribute('data-dark-page') ||
-          t === 'dark' ||
-          (t !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches)
-        /* Somebody signed in who opens `/` is the app, and the landing
-           written into the page is not shown to them while it starts. */
-        if (localStorage.getItem('session')) document.documentElement.setAttribute('data-signed-in', '')
+        var dark = t === 'dark' || (t !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches)
         document.documentElement.dataset.theme = dark ? 'dark' : 'light'
-        /*
-         * And the window's own bar, which an installed copy takes from
-         * `theme-color`. Left alone it is whatever the manifest said at
-         * install — one colour for ever — so a dark app sat under a white
-         * title bar.
-         *
-         * The two values are `--canvas` in `theme.css`, written here as
-         * well because the stylesheet has not arrived yet and a bar that
-         * corrects itself a beat later is a white flash on every start.
-         * `applyTheme` reads the real token once the sheet is in, so this
-         * pair only has to be close enough for one frame.
-         */
-        var bar = document.createElement('meta')
-        bar.name = 'theme-color'
-        bar.content = dark ? '#090909' : '#f5f5f7'
-        document.head.appendChild(bar)
       } catch (e) {
         document.documentElement.dataset.theme = 'light'
       }
     </script>
-    <!--
-      The ground and the mark before the stylesheet: the colours are
-      `--canvas` in `theme.css` — white on a phone in light, the grey on
-      anything wider, the near-black in dark — written here because this is
-      painted before that sheet has arrived.
-    -->
     <style>
       html { background: #f5f5f7; }
       html[data-theme='dark'] { background: #090909; }
-      #splash {
-        position: fixed;
-        inset: 0;
-        z-index: 100;
-        display: grid;
-        place-items: center;
-        background-color: #f5f5f7;
-      }
-      html[data-theme='dark'] #splash { background-color: #090909; }
-      @media (max-width: 639px) {
-        html:not([data-theme='dark']), html:not([data-theme='dark']) #splash { background-color: #ffffff; }
-      }
-      #splash img { width: 80px; height: 80px; }
-      html[data-signed-in] [data-home] { display: none; }
-      #splash[data-later] { animation: splash-in 200ms cubic-bezier(0.23, 1, 0.32, 1) 400ms backwards; }
-      #splash[data-going] { opacity: 0; pointer-events: none; transition: opacity 200ms cubic-bezier(0.23, 1, 0.32, 1); }
-      @keyframes splash-in { from { opacity: 0; } }
-      @media (prefers-reduced-motion: reduce) {
-        #splash[data-later], #splash[data-going] { animation: none; transition: none; }
-      }
     </style>
   </head>
   <body>
-    <!--
-      The frame, before the app — `docs/specs/arrival.md`.
-
-      The sheets the shell is laid on, drawn from what this browser already
-      knows: whether somebody is signed in, how wide the window is, how wide
-      they left the sidebar and a project's tools, and whether the address
-      is a project. Painted under the app and taken away in the same frame
-      the shell is first drawn, which covers it exactly — so what a person
-      sees is the window's furniture at once and its contents arriving into
-      it, instead of a blank ground and the word "Loading…" in a corner.
-
-      The numbers are the app's: the bar's 48px, `--lift` and `--r-lift`,
-      `useColumn('sidebar-width', 248, 200, 380)` and its 56 shut,
-      `useWidth('tools-width', 212, 168, 320)`, the screen names `route.ts`
-      refuses as projects. Change one there and change it here.
-    -->
-    <div id="frame" aria-hidden="true"></div>
-    <script>
-      try {
-        var size = function (key, start, min, max) {
-          var n = Number(localStorage.getItem(key))
-          return n >= min && n <= max ? n : start
-        }
-        if (localStorage.getItem('session') && matchMedia('(min-width: 1024px)').matches) {
-          var side =
-            localStorage.getItem('sidebar-width-shut') === '1'
-              ? 56
-              : size('sidebar-width', 248, 200, 380)
-          var parts = location.pathname.split('/')
-          var screens = ['notifications', 'members', 'chat', 'settings', 'search', 'projects']
-          var project =
-            parts[1] && screens.indexOf(parts[1]) < 0 && parts[2] && screens.indexOf(parts[2]) < 0
-          var frame = document.getElementById('frame')
-          frame.style.paddingLeft = 'calc(var(--lift) * 2 + ' + side + 'px)'
-          frame.innerHTML =
-            (project ? '<div style="width:' + size('tools-width', 212, 168, 320) + 'px"></div>' : '') +
-            '<div style="flex:1"></div>'
-        }
-      } catch (e) {}
-    </script>
-    <!--
-      The mark, on a phone — installed, or in a tab with a session: there the
-      frame above has no sheets to draw, and the ground alone for the second
-      it takes the app to start read as a black screen. Over the app rather
-      than under it, so it can stay until the first screen's contents are in
-      and fade into them, instead of leaving an empty ground between the two.
-
-      At once in an installed copy, where it carries on from the launch image
-      iOS has just shown; in a tab only if the start is slow enough to be
-      seen, so a quick load is not a logo flashing past. Taken away by the
-      app (`letGo` in `App.tsx`), and by itself after eight seconds whatever
-      happened, so a start that failed is not a logo for ever.
-    -->
-    <div id="splash" aria-hidden="true" hidden><img src="/src/splash.png" alt="" /></div>
-    <script>
-      try {
-        var mark = document.getElementById('splash')
-        var installed =
-          navigator.standalone === true || matchMedia('(display-mode: standalone)').matches
-        var narrow = !matchMedia('(min-width: 1024px)').matches
-        if (narrow && (installed || localStorage.getItem('session'))) {
-          if (!installed) mark.setAttribute('data-later', '')
-          mark.hidden = false
-          setTimeout(function () {
-            mark.remove()
-          }, 8000)
-        } else mark.remove()
-      } catch (e) {}
-    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

@@ -1,3 +1,0 @@
-# A team's own Tuff: nothing here is for search engines.
-User-agent: *
-Disallow: /

@@ -24,18 +24,21 @@ export function Button({
   children: React.ReactNode
   /** `primary` is the one action on the screen; everything else is quiet. */
   tone?: 'primary' | 'quiet' | 'danger'
-} & React.ButtonHTMLAttributes<HTMLButtonElement>) {
+} & React.ComponentProps<'button'>) {
   const styles: Record<string, React.CSSProperties> = {
     primary: { background: 'var(--accent)', color: 'var(--on-accent)' },
     quiet: quietLook,
     danger: { background: 'transparent', color: 'var(--danger)' },
   }
   return (
+    /* Not a submit unless it says so: a Cancel inside a form should not send it.
+       The caller's class and style are added to the kit's, not swapped for them. */
     <button
+      type="button"
       data-control
-      className="inline-flex shrink-0 items-center gap-2 rounded-full px-4 text-sm font-medium transition-transform active:scale-[0.97]"
-      style={{ height: 'var(--control-h)', ...styles[tone] }}
       {...rest}
+      className={`inline-flex shrink-0 items-center gap-2 rounded-full px-4 text-sm font-medium ${rest.className ?? ''}`}
+      style={{ height: 'var(--control-h)', ...styles[tone], ...rest.style }}
     >
       {children}
     </button>
@@ -43,20 +46,20 @@ export function Button({
 }
 
 /** A field of the kit's. Not a login unless it says so — `kit/fields.tsx`. */
-export function Field({ wide = false, ...rest }: { wide?: boolean } & React.InputHTMLAttributes<HTMLInputElement>) {
+export function Field({ wide = false, ...rest }: { wide?: boolean } & React.ComponentProps<'input'>) {
   return (
     <input
       {...notALogin}
-      className={`rounded-[var(--r-tile)] px-2 text-sm outline-none placeholder:text-[var(--ink-3)] ${wide ? 'w-full' : ''}`}
-      style={{ height: 'var(--control-h)', background: 'var(--sunken)', color: 'var(--ink)' }}
       {...rest}
+      className={`rounded-[var(--r-tile)] px-2 text-sm placeholder:text-[var(--ink-3)] ${wide ? 'w-full' : ''} ${rest.className ?? ''}`}
+      style={{ height: 'var(--control-h)', background: 'var(--sunken)', color: 'var(--ink)', ...rest.style }}
     />
   )
 }
 
 /** A key, shown the size it is pressed at. */
 export function Kbd({ children }: { children: React.ReactNode }) {
-  return <kbd className="rounded-[var(--r-tile)] px-1 font-sans text-badge leading-[15px] bg-sunken text-ink-3">{children}</kbd>
+  return <kbd className="rounded-[var(--r-tile)] px-1 font-sans text-badge leading-[15px] bg-sunken text-ink-2">{children}</kbd>
 }
 
 /**
@@ -86,16 +89,19 @@ export function Kbd({ children }: { children: React.ReactNode }) {
 export function Badge({
   count,
   testId,
-  urgent = false,
-  quiet = false,
+  tone = 'normal',
 }: {
   count: number
   testId?: string
-  /** Somebody named you behind it — red, as Slack draws a mention. */
-  urgent?: boolean
-  /** What a turned-down room has unread: there to see, grey, asking nothing. */
-  quiet?: boolean
+  /**
+   * One answer, not two booleans that could both be true.
+   * `urgent`: somebody named you behind it — red, as Slack draws a mention.
+   * `quiet`: what a turned-down room has unread: there to see, grey, asking nothing.
+   */
+  tone?: 'normal' | 'urgent' | 'quiet'
 }) {
+  const urgent = tone === 'urgent'
+  const quiet = tone === 'quiet'
   if (count <= 0) return null
   return (
     <span
@@ -107,9 +113,9 @@ export function Badge({
       /* Half its own height, which is what makes a pill a pill rather than
          a number off the radius ramp. */
       style={{
-        background: urgent ? 'var(--danger)' : quiet ? 'var(--track)' : 'var(--badge)',
+        background: urgent ? 'var(--danger-fill)' : quiet ? 'var(--track)' : 'var(--badge)',
         borderRadius: 9,
-        color: urgent ? '#fff' : quiet ? 'var(--ink-3)' : 'var(--ink)',
+        color: urgent ? 'var(--on-accent)' : quiet ? 'var(--ink-3)' : 'var(--ink)',
       }}
     >
       {/* The number's box is trimmed to its figures — cap height to
@@ -135,16 +141,17 @@ export function Switch({
   testId,
   said,
   disabled = false,
+  ...rest
 }: {
   on: boolean
   onChange: (on: boolean) => void
-  testId: string
+  testId?: string
   said: string
   disabled?: boolean
-}) {
+} & Omit<React.ComponentProps<'input'>, 'type' | 'checked' | 'onChange' | 'disabled'>) {
   return (
     <span
-      className="relative inline-flex h-6 w-10 shrink-0 rounded-full transition-colors duration-150"
+      className="relative inline-flex h-6 w-10 shrink-0 rounded-full transition-colors duration-150 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-accent"
       style={{
         background: on ? 'var(--accent)' : 'color-mix(in oklch, var(--ink) 18%, transparent)',
         opacity: disabled ? 0.5 : 1,
@@ -160,6 +167,7 @@ export function Switch({
         role="switch"
         data-testid={testId}
         aria-label={said}
+        {...rest}
         checked={on}
         disabled={disabled}
         onChange={(e) => onChange(e.target.checked)}

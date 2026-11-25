@@ -125,7 +125,7 @@ export function PriorityPick({
            pressed last. */
         onPointerEnter={(e) => e.pointerType === 'mouse' && setWarm(true)}
         onPointerLeave={() => setWarm(false)}
-        className={`flex size-5 shrink-0 items-center justify-center transition-colors ${className ?? ''}`}
+        className={`relative flex size-5 shrink-0 items-center justify-center transition-colors before:absolute before:-inset-1 ${className ?? ''}`}
         /* Brighter under the pointer rather than on a ground of its own —
            the row already says where the hand is, and a second box inside
            it for one glyph is two answers to one question. */

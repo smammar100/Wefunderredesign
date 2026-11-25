@@ -1,5 +1,5 @@
 {
-  "name": "tracker",
+  "name": "tuff-design-system",
   "license": "AGPL-3.0-only",
   "private": true,
   "type": "module",
@@ -8,39 +8,12 @@
     "node": ">=22"
   },
   "scripts": {
-    "generate": "pnpm --filter @tracker/shared-schema generate",
-    "typecheck": "pnpm -r typecheck",
-    "lint": "biome check",
-    "format": "biome format --write",
-    "test": "pnpm -r test",
-    "db:up": "docker compose -f docker-compose.dev.yml up -d",
-    "db:down": "docker compose -f docker-compose.dev.yml down",
-    "migrate": "pnpm --filter @tracker/server migrate",
-    "seed": "pnpm --filter @tracker/server seed",
-    "dev": "pnpm --filter @tracker/server dev",
-    "e2e": "playwright test",
-    "web": "pnpm --filter @tracker/web dev",
-    "check": "./scripts/check.sh",
-    "dev:account": "pnpm --filter @tracker/server dev:account",
-    "load": "pnpm --filter @tracker/server load",
-    "bench": "pnpm --filter @tracker/server bench",
-    "worker": "pnpm --filter @tracker/server worker",
-    "build": "pnpm --filter @tracker/shared-schema build && pnpm --filter @tracker/server build && pnpm --filter @tracker/web build"
+    "dev": "pnpm --filter @tracker/web dev",
+    "build": "pnpm --filter @tracker/web build",
+    "typecheck": "pnpm -r typecheck"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.15",
-    "@playwright/test": "^1.63.0",
     "@types/node": "^26.6.2",
-    "quicktype-core": "^26.0.0",
-    "tsx": "^4.23.13",
     "typescript": "^7.0.2"
-  },
-  "pnpm": {
-    "overrides": {
-      "body-parser@<2.4.0": "^2.4.0",
-      "qs@<6.16.1": "^6.16.1",
-      "fast-uri@<3.1.9": "^3.1.9",
-      "ip-address@<10.7.4": "^10.7.4"
-    }
   }
 }

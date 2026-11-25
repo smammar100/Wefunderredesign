@@ -96,7 +96,7 @@ export function RepeatPanel({
                 className="relative flex h-8 w-full items-center gap-2 px-2 text-left text-base text-ink"
                 style={{ borderRadius: 'var(--r-row)' }}
               >
-                <span className="flex w-4 shrink-0 justify-center text-accent">{on && <Icon name="check" size={14} />}</span>
+                <span className="flex w-4 shrink-0 justify-center text-accent-ink">{on && <Icon name="check" size={14} />}</span>
                 <span className="truncate">{r ? repeatSaid(r) : W.never}</span>
               </button>
             )

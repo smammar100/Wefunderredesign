@@ -25,7 +25,7 @@ export function Popup<T extends string>({
   return (
     <span
       data-control
-      className="relative flex h-7 shrink-0 items-center gap-2 pr-2 pl-3 text-base font-medium bg-track text-ink"
+      className="relative flex h-7 shrink-0 items-center gap-2 pr-2 pl-3 text-base font-medium bg-track text-ink has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-accent"
       style={{
         borderRadius: 'var(--r-row)',
         letterSpacing: 'var(--track-body)',
@@ -91,7 +91,7 @@ export function Select<T extends string>({
         data-pill
         value={value}
         onChange={(e) => onPick(e.target.value as T)}
-        className="h-8 cursor-pointer rounded-full bg-transparent pl-4 text-sm font-medium outline-none text-ink"
+        className="h-8 cursor-pointer rounded-full bg-transparent pl-4 text-sm font-medium text-ink"
       >
         {options.map((o) => (
           <option key={o.id} value={o.id}>

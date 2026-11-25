@@ -61,6 +61,5 @@ export { DuePick, DateButton, writtenDay, type RepeatField } from './kit/dates.j
 export { RepeatMark } from './kit/repeat.jsx'
 export { CyclePick, Status } from './kit/status.jsx'
 export type { Placed } from './kit/status.jsx'
-export { MentionedIn, readLinks } from './kit/links.jsx'
 export { SHOWING, SLIDING, useShown, Popover, Choice, HowLong } from './kit/popover.jsx'
-export { useAttach, InboxCode } from './kit/attach.jsx'
+export { useAttach } from './kit/attach.jsx'

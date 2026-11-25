@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="192" height="192"><circle cx="24" cy="24" r="24" fill="#34c759"/><g class="af-body"><path d="M15.5 16 L13 11 M32.5 16 L35 11" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round"/>
-<circle cx="24" cy="26" r="13" fill="#ffffff"/>
-<circle cx="10.5" cy="26" r="2.5" fill="#d3f5dc"/><circle cx="37.5" cy="26" r="2.5" fill="#d3f5dc"/>
-<g class="af-eyes"><circle cx="19" cy="25" r="4.6" fill="#1d1d1f"/><circle cx="29" cy="25" r="4.6" fill="#1d1d1f"/><circle class="af-glow" cx="20.2" cy="23.8" r="1.6" fill="#ffffff"/><circle class="af-glow" cx="30.2" cy="23.8" r="1.6" fill="#ffffff"/></g>
-<path d="M21 32 h6" stroke="#1d1d1f" stroke-width="1.8" stroke-linecap="round"/></g></svg>

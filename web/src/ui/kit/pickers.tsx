@@ -247,7 +247,7 @@ export function WhoPick({
                 <input
                   {...findField}
                   data-testid="who-search"
-                  autoFocus
+                  autoFocus={window.matchMedia('(pointer: fine)').matches}
                   value={typed}
                   onChange={(e) => setTyped(e.target.value)}
                   onKeyDown={(e) => {
@@ -391,7 +391,7 @@ export function ProjectPick({
                 <input
                   {...findField}
                   data-testid="project-search"
-                  autoFocus
+                  autoFocus={window.matchMedia('(pointer: fine)').matches}
                   value={typed}
                   onChange={(e) => setTyped(e.target.value)}
                   onKeyDown={(e) => {

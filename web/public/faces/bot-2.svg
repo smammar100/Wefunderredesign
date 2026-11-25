@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="192" height="192"><circle cx="24" cy="24" r="24" fill="#ff9500"/><g class="af-body"><path d="M19 15 L15.5 9.5 M29 15 L32.5 9.5" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round"/>
-<circle class="af-glow" cx="15" cy="8.5" r="2.2" fill="#ff3b30"/>
-<circle class="af-glow" cx="33" cy="8.5" r="2.2" fill="#ff3b30"/>
-<rect x="10" y="14" width="28" height="23" rx="6" fill="#ffffff"/>
-<rect x="13" y="17" width="22" height="15" rx="4" fill="#1d1d1f"/>
-<g class="af-eyes"><circle cx="19.5" cy="23" r="2.6" fill="#ffcc00"/><circle cx="28.5" cy="23" r="2.6" fill="#ffcc00"/></g>
-<path d="M21 27.5 q3 2.6 6 0" stroke="#ffcc00" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-<rect x="18" y="36" width="12" height="3" rx="1.5" fill="#ffe2b8"/></g></svg>

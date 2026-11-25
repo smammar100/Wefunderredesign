@@ -81,7 +81,7 @@
   --glass-tint: oklch(100% 0 0 / 0.62);
   /* Nearly solid on purpose: this one has to carry white text. See the note
      on the accent tone in Glass.tsx. */
-  --glass-accent-tint: oklch(55% 0.17 262 / 0.88);
+  --glass-accent-tint: oklch(51% 0.17 262 / 0.88);
   --glass-accent-edge: oklch(100% 0 0 / 0.38);
   --glass-edge: oklch(100% 0 0 / 0.55);
   --glass-shadow: 0 8px 28px oklch(24% 0.01 260 / 0.1);
@@ -210,6 +210,7 @@
   --color-line-strong: var(--line-strong);
   --color-accent: var(--accent);
   --color-accent-soft: var(--accent-soft);
+  --color-accent-ink: var(--accent-ink);
   --color-on-accent: var(--on-accent);
   --color-due: var(--due);
   --color-danger: var(--danger);
@@ -438,7 +439,10 @@
   --code-removed: #82071e;
   --code-removed-ground: #ffebe9;
 
-  --accent: #007aff;
+  /* A step deeper than system blue: #007aff carried white text at 4.0:1
+     and read as text at 3.7:1 on a panel. This is 5.3:1 both ways. */
+  --accent: oklch(0.535 0.192 257.4);
+  --accent-ink: var(--accent);
   --accent-soft: #e6f0ff;
   /* Words a thread is on. The yellow
      every document editor marks a comment with, washed so the words stay
@@ -454,7 +458,9 @@
    * people to ignore the first.
    */
   --due: #c93400;
-  --danger: #ff3b30;
+  /* Deep enough to be read as a word on white (4.6:1); #ff3b30 was 3.5. */
+  --danger: oklch(0.569 0.232 28.7);
+  --danger-fill: var(--danger);
   /* The ground under a red row a pointer is on — a menu's Delete. The
      danger itself at a tenth, so the row reads as the same red thing lit
      rather than as a grey highlight on red words. */
@@ -596,7 +602,7 @@
   --tint-6-ink: #4847af;
   --tint-7-ink: #743b92;
   --tint-8-ink: #9e1c35;
-  --tint-9-ink: #8e8e93;
+  --tint-9-ink: var(--n-8);
 
   /*
    * Six radii, and each one belongs to a size of thing: a 20px tile, a row,
@@ -769,6 +775,7 @@
 
 @layer base {
   html {
+    -webkit-tap-highlight-color: transparent;
     color-scheme: light;
   }
   body {
@@ -792,6 +799,9 @@
      */
     font-weight: 500;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* A bold or italic the face does not have is not drawn by smearing. */
+    font-synthesis: none;
     font-feature-settings: 'cv05', 'ss01';
   }
 
@@ -891,6 +901,15 @@
     outline: 2px solid var(--accent);
     outline-offset: -1px;
     border-radius: var(--r-tile);
+  }
+  /* Outside the edge on a control: drawn inside, the ring on the primary
+     button was accent on accent — the one action had no visible focus. */
+  [data-control]:focus-visible {
+    outline-offset: 2px;
+  }
+  /* Selected text in the product's own colour, in both themes. */
+  ::selection {
+    background: color-mix(in oklab, var(--accent) 22%, transparent);
   }
   /*
    * A control's words are not a passage.
@@ -1025,7 +1044,7 @@
     transition: transform 120ms var(--ease-out);
   }
 
-  button:active {
+  button:not(:disabled):active {
     transform: scale(0.97);
   }
 
@@ -1389,12 +1408,25 @@
   *::after {
     animation-duration: 1ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 1ms !important;
+    /* What the comment above says: fades and colour keep their timing,
+       and anything that moves arrives at once. */
+    transition-property: opacity, color, background-color, border-color, outline-color, fill, stroke !important;
   }
 
   button:active {
     transform: none;
   }
+}
+
+/*
+ * A theme change is not an animation. Every colour that has a transition
+ * would otherwise tween at once on the switch; set for two frames by
+ * whatever flips `data-theme`.
+ */
+:root[data-swapping] *,
+:root[data-swapping] *::before,
+:root[data-swapping] *::after {
+  transition: none !important;
 }
 
 /*
@@ -1519,8 +1551,10 @@
   --mark-space: srgb;
   --mark-wash-pct: 20%;
   --ink: var(--n-9);
-  --ink-2: var(--n-7);
-  --ink-3: var(--n-6);
+  /* The same steps as light. One down, ink-3 was 2.6:1 on a surface —
+     under the floor even for a placeholder. */
+  --ink-2: var(--n-8);
+  --ink-3: var(--n-7);
   --side-ink: #8f8f97;
 
   --hover: rgb(255 255 255 / 0.06);
@@ -1554,11 +1588,16 @@
   --code-removed: #ffdcd7;
   --code-removed-ground: #67060c;
 
-  --accent: #0a84ff;
+  /* Dark needs two blues: a fill deep enough for white words on it, and
+     a lighter one for words drawn in blue on the dark ground. */
+  --accent: oklch(0.568 0.19 255.5);
+  --accent-ink: oklch(0.709 0.154 255.5);
   --accent-soft: #10233d;
   --on-accent: #ffffff;
   --due: #ff9f0a;
   --danger: #ff453a;
+  /* What white sits on — the word colour above is too light to carry it. */
+  --danger-fill: oklch(0.589 0.224 28.3);
   --gh-open: #3fb950;
   --gh-merged: #ab7df8;
   --gh-closed: #f85149;
@@ -1609,16 +1648,18 @@
   --face-8: #db2f52;
   --face-9: #747479;
 
-  --tint-0-ink: #ff453a;
+  /* Lifted to 6:1 on every chip wash, same hues. The saturated system
+     colours were 3.5–3.9:1 as 12px words on the darkest wash. */
+  --tint-0-ink: oklch(0.789 0.122 28.3);
   --tint-1-ink: #ff9f0a;
   --tint-2-ink: #ffd60a;
   --tint-3-ink: #30d158;
   --tint-4-ink: #40c8e0;
-  --tint-5-ink: #1e8eff;
-  --tint-6-ink: #8583ec;
-  --tint-7-ink: #c366f3;
-  --tint-8-ink: #ff375f;
-  --tint-9-ink: #98989f;
+  --tint-5-ink: oklch(0.776 0.116 253.8);
+  --tint-6-ink: oklch(0.768 0.121 282.2);
+  --tint-7-ink: oklch(0.797 0.143 312.5);
+  --tint-8-ink: oklch(0.786 0.124 16);
+  --tint-9-ink: oklch(0.803 0.01 286.1);
 
   /* Dark glass is a darker material, not the light one turned down: a
      light translucent surface over a dark ground goes grey and the text on
@@ -1635,6 +1676,17 @@
   --dialog-scrim: rgb(0 0 0 / 0.6);
   --dialog-shadow: 0 24px 64px rgb(0 0 0 / 0.36);
   --dialog-edge: rgb(255 255 255 / 0.04);
+}
+
+/* More contrast, asked for in dark. The `:root` block above loses to the
+   dark theme's own selector on every token, so it never reached here. */
+@media (prefers-contrast: more) {
+  :root[data-theme='dark'] {
+    --ink-2: #d1d1d6;
+    --ink-3: #b4b4ba;
+    --line: rgb(255 255 255 / 0.2);
+    --hover: rgb(255 255 255 / 0.1);
+  }
 }
 
 /*
@@ -2022,6 +2074,7 @@
 .prose-body .ProseMirror h3 {
   font-weight: 600;
   letter-spacing: var(--track-title);
+  text-wrap: balance;
 }
 .prose-body .ProseMirror h1 { font-size: 1.6em; line-height: 1.3333; }
 .prose-body .ProseMirror h2 { font-size: 1.3333em; line-height: 1.4; }
@@ -2194,7 +2247,7 @@ html[data-follow] .prose-body .ProseMirror a {
   padding: 0 4px 0 8px;
 }
 .code-tool[data-done] {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 @media (hover: hover) and (pointer: fine) {
   .code-tool:hover,
@@ -2232,7 +2285,7 @@ html[data-follow] .prose-body .ProseMirror a {
 .tok-type { color: var(--code-type); }
 /* Somebody called in, in the chat's line and in what it sent. */
 .chat-mention {
-  color: var(--accent);
+  color: var(--accent-ink);
   background: var(--accent-soft);
   border-radius: 4px;
   padding: 0 4px;
@@ -2254,7 +2307,7 @@ html[data-follow] .prose-body .ProseMirror a {
   max-width: none;
 }
 .prose-body .ProseMirror a {
-  color: var(--accent);
+  color: var(--accent-ink);
   text-decoration: underline;
   /* An address is one long word: it breaks where it must rather than
      pushing the body wider than its column. */
@@ -2407,9 +2460,11 @@ html[data-follow] .prose-body .ProseMirror a {
   border-radius: var(--r-row);
   color: var(--ink-3);
 }
-.toggle-button:hover {
-  background: var(--hover);
-  color: var(--ink-2);
+@media (hover: hover) and (pointer: fine) {
+  .toggle-button:hover {
+    background: var(--hover);
+    color: var(--ink-2);
+  }
 }
 .toggle-button svg,
 .toggle-read > summary > .toggle-chevron svg {
@@ -2636,14 +2691,18 @@ html[data-follow] .prose-body .ProseMirror a {
   .prose-body [contenteditable='true'] {
     font-size: 16px !important;
   }
-  html {
+  /* `touch-action` is not inherited, so a control inside a scroller never
+     got the root's value — named here, at zero specificity so any rule
+     that sets its own still wins. */
+  html,
+  :where(button, a, input, select, textarea, label, [role='button'], [data-control], [data-row]) {
     touch-action: manipulation;
   }
 }
 
 /* A task named in a message — `ChatComposer.tsx`, `TaskCard.tsx`. */
 .chat-taskref {
-  color: var(--accent);
+  color: var(--accent-ink);
   font-weight: 500;
   cursor: pointer;
   /* A button, which centres its words: a name that wrapped on a phone
@@ -2909,7 +2968,7 @@ img[draggable='false'] {
  * fading behind it.
  */
 [data-dialog-panel][data-sheet] {
-  transition: transform 240ms var(--ease-out);
+  transition: transform 240ms var(--ease-drawer);
 }
 @starting-style {
   [data-dialog-panel][data-sheet] {
@@ -3078,6 +3137,14 @@ aside[data-moving] > [data-fluid] {
  * thing once, as it is first seen (`[data-watch]` is told by `useReveal`),
  * on transform and opacity alone; reduced motion gets it all in place.
  */
+.lp-link {
+  transition: color 150ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .lp-link:hover {
+    color: var(--lp-fg) !important;
+  }
+}
 .lp-tile {
   animation: lp-tile 640ms var(--ease-out) both;
   animation-delay: var(--d, 0ms);
@@ -3804,7 +3871,7 @@ aside[data-moving] > [data-fluid] {
   display: inline-flex;
   vertical-align: middle;
   margin-right: 0.25em;
-  color: var(--accent);
+  color: var(--accent-ink);
   position: relative;
   top: -0.08em;
 }
@@ -3958,5 +4025,20 @@ aside[data-moving] > [data-fluid] {
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   .group:hover .paper-sheet {
     transform: translateY(-2px);
+  }
+}
+
+/*
+ * The feed (`feed/Feed.tsx`): the three faces at the head of a group post
+ * sit tilted, and the one under the pointer straightens and lifts above
+ * the others. Only for a pointer that hovers.
+ */
+.feed-face {
+  transform: rotate(var(--r, 0deg));
+}
+@media (hover: hover) and (pointer: fine) {
+  .feed-face:hover {
+    z-index: 3 !important;
+    transform: translateY(-4px) rotate(0deg) scale(1.08);
   }
 }

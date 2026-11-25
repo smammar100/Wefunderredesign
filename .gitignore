@@ -19,3 +19,8 @@ dist-ssr/
 # Backups somebody took by the README: data, and private.
 *.dump
 tuff-files-*
+
+# Third-party agent skills installed locally (licensed, not ours to publish).
+.claude/skills/
+.codex/
+.cursor/

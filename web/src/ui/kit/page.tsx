@@ -13,6 +13,7 @@ export function Header({ title, children }: { title: React.ReactNode; children?:
        name would be the same words twice. What sits beside it is kept. */
     <div className="flex shrink-0 items-center gap-3 px-[var(--gutter)] pt-7 max-sm:pt-3">
       <h1
+        title={typeof title === 'string' ? title : undefined}
         className="min-w-0 flex-1 truncate text-title font-medium max-lg:hidden text-ink"
         style={{ letterSpacing: 'var(--track-display)' }}
       >
@@ -149,7 +150,7 @@ export function PageTitle({ children, action }: { children: React.ReactNode; act
   if (!wide) return action ? <div className="flex shrink-0 items-center gap-3">{action}</div> : null
   return (
     <div className="flex shrink-0 items-center gap-3">
-      <h1 className="min-w-0 flex-1 truncate text-title font-medium text-ink" style={{ letterSpacing: 'var(--track-display)' }}>
+      <h1 title={typeof children === 'string' ? children : undefined} className="min-w-0 flex-1 truncate text-title font-medium text-ink" style={{ letterSpacing: 'var(--track-display)' }}>
         {children}
       </h1>
       {action}
@@ -193,10 +194,10 @@ export function EmptyState({
   return (
     <div data-empty={art} className="flex flex-1 flex-col items-center justify-center gap-2 py-16 text-center">
       <Art name={art} />
-      <p className="mt-2 text-xl font-medium text-ink" style={{ letterSpacing: 'var(--track-title)' }}>
+      <p className="mt-2 text-xl font-medium text-ink text-balance" style={{ letterSpacing: 'var(--track-title)' }}>
         {title}
       </p>
-      {children && <p className="max-w-[420px] text-base text-ink-2">{children}</p>}
+      {children && <p className="max-w-[420px] text-base text-ink-2 text-pretty">{children}</p>}
       {/* Four above it rather than the two the rest of this stack uses: a
           button is a different kind of thing from the sentence over it, and
           the gap is what says so. */}

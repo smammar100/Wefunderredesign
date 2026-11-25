@@ -324,8 +324,9 @@ export function Resizer({
       }}
       onDoubleClick={() => onReset()}
       onKeyDown={(e) => {
-        if (e.key === 'ArrowLeft') onChange(width - 16 * toward, true)
-        else if (e.key === 'ArrowRight') onChange(width + 16 * toward, true)
+        /* Shift for the long way, as every slider does. */
+        if (e.key === 'ArrowLeft') onChange(width - (e.shiftKey ? 64 : 16) * toward, true)
+        else if (e.key === 'ArrowRight') onChange(width + (e.shiftKey ? 64 : 16) * toward, true)
         else if (e.key === 'Enter' || e.key === ' ') onReset(true)
         else return
         e.preventDefault()

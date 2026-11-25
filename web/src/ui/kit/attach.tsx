@@ -387,7 +387,7 @@ export function useAttach(projectId: string | null) {
           title={W.removeNamed(one.name)}
           onMouseDown={(e) => e.preventDefault()}
           onClick={() => remove(key, a)}
-          className="absolute -top-2 -right-2 flex size-5 items-center justify-center rounded-full bg-ink text-surface"
+          className="absolute -top-2 -right-2 flex size-5 items-center justify-center before:absolute before:-inset-1 rounded-full bg-ink text-surface"
           style={{ boxShadow: '0 0 0 2px var(--track)' }}
         >
           <Icon name="close" size={8} />
@@ -409,7 +409,7 @@ export function useAttach(projectId: string | null) {
             className="flex h-16 items-center gap-2 px-3 text-sm bg-sunken text-due"
             style={{ borderRadius: 'var(--r-tile)' }}
           >
-            <span className="max-w-[160px] truncate">{name}</span>
+            <span className="max-w-[160px] truncate" title={name}>{name}</span>
             <span className="text-ink-3">{SAYS.tooBigToSend}</span>
           </span>
         ))}
@@ -475,7 +475,7 @@ export function InboxCode({
           data-testid={`${testId}-send`}
           onClick={() => void send()}
           disabled={busy}
-          className="h-8 px-2 text-sm font-medium text-accent"
+          className="h-8 px-2 text-sm font-medium text-accent-ink"
         >
           {sent ? W.sendAgain : W.emailMeACode}
         </button>

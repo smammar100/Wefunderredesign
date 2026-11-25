@@ -222,7 +222,7 @@ export function Composer({
                   {t.project_key ? `${t.project_key}-${t.number}` : `#${t.number}`}
                 </span>
               )}
-              <span className="truncate">{t.title}</span>
+              <span className="truncate" title={t.title}>{t.title}</span>
             </button>
           ))}
         </div>

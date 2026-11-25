@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="192" height="192"><circle cx="24" cy="24" r="24" fill="#30b0c7"/><g class="af-body"><rect x="14" y="14" width="20" height="20" rx="5" transform="rotate(45 24 24)" fill="#ffffff"/>
-<g class="af-eyes">
-<circle cx="24" cy="24" r="5.5" fill="#d6f3f8"/>
-<g class="af-look">
-<circle cx="24" cy="24" r="3.08" fill="#1d1d1f"/>
-<circle cx="25.21" cy="22.68" r="0.99" fill="#ffffff"/>
-</g>
-</g>
-<path class="af-glow" d="M37 33 l0.8 2 2 0.8 -2 0.8 -0.8 2 -0.8 -2 -2 -0.8 2 -0.8 z" fill="#ffcc00"/></g></svg>

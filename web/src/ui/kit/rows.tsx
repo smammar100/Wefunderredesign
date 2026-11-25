@@ -15,6 +15,8 @@ export function Row({
   onClick,
   rail = false,
   as = 'div',
+  className = '',
+  style,
   ...rest
 }: {
   children: React.ReactNode
@@ -32,7 +34,7 @@ export function Row({
       onClick={onClick}
       className={`group relative flex w-full shrink-0 items-center gap-2 rounded-[var(--r-tile)] px-2 text-left ${
         rail ? 'before:absolute before:top-2 before:bottom-2 before:left-0 before:w-1 before:rounded-full' : ''
-      }`}
+      } ${className}`}
       style={{
         height: 'var(--row-h)',
         /* Every row at full strength, and the ground alone says which one
@@ -41,6 +43,7 @@ export function Row({
            you may not. */
         color: 'var(--ink)',
         background: selected ? 'var(--hover)' : undefined,
+        ...style,
       }}
       {...rest}
     >
@@ -52,7 +55,7 @@ export function Row({
 /** What a row shows on the right, and only while it is reached for. */
 export function RowActions({ children }: { children: React.ReactNode }) {
   return (
-    <span className="ml-auto flex shrink-0 items-center gap-1 opacity-0 transition-opacity on-group-hover:opacity-100 group-focus-within:opacity-100">
+    <span className="ml-auto flex shrink-0 items-center gap-1 mouse:opacity-0 transition-opacity on-group-hover:opacity-100 group-focus-within:opacity-100">
       {children}
     </span>
   )

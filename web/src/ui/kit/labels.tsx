@@ -151,7 +151,7 @@ export function LabelChip({
         A block child is something the rule can act on, which is what makes
         the shortening a decision rather than an accident.
       */}
-      <span className="truncate">{label.name}</span>
+      <span className="truncate" title={label.name}>{label.name}</span>
     </span>
   )
 }
@@ -265,7 +265,7 @@ export function LabelPick({
             <input
               {...findField}
               data-testid="label-search"
-              autoFocus
+              autoFocus={window.matchMedia('(pointer: fine)').matches}
               value={typed}
               onChange={(e) => setTyped(e.target.value)}
               onKeyDown={(e) => {
